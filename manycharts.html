@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+  margin: 0;
+}
+
+.line {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+.area {
+  fill: #e7e7e7;
+}
+
+</style>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 8, right: 10, bottom: 2, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 69 - margin.top - margin.bottom;
+
+var parseDate = d3.time.format("%Y").parse;
+
+var x = d3.time.scale()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var area = d3.svg.area()
+    .x(function(d) { return x(d.date); })
+    .y0(height)
+    .y1(function(d) { return y(d.count); });
+
+var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.count); });
+
+d3.csv("https://gist.githubusercontent.com/Tcleary/d285bff305620b51a2d4ab0f52c7f5ed/raw/43d721371fb14634837d688d7519cc3cab1ef699/keywords_year_list.csv", type, function(error, data) {
+
+  // Nest data by name.
+  var names = d3.nest()
+      .key(function(d) { return d.name; })
+      .entries(data);
+
+  // Compute the maximum count per name, needed for the y-domain.
+  names.forEach(function(s) {
+    s.maxCount = d3.max(s.values, function(d) { return d.count; });
+  });
+
+  // Compute the minimum and maximum date across name.
+  // We assume values are sorted by date.
+  x.domain([
+    d3.min(names, function(s) { return s.values[0].date; }),
+    d3.max(names, function(s) { return s.values[s.values.length - 1].date; })
+  ]);
+
+  // Add an SVG element for each name, with the desired dimensions and margin.
+  var svg = d3.select("body").selectAll("svg")
+      .data(names)
+    .enter().append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // Add the area path elements. Note: the y-domain is set per element.
+  svg.append("path")
+      .attr("class", "area")
+      .attr("d", function(d) { y.domain([0, d.maxCount]); return area(d.values); });
+
+  // Add the line path elements. Note: the y-domain is set per element.
+  svg.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { y.domain([0, d.maxCount]); return line(d.values); });
+
+  // Add a small label for the name name.
+  svg.append("text")
+      .attr("x", width - 6)
+      .attr("y", height - 6)
+      .style("text-anchor", "end")
+      .text(function(d) { return d.key; });
+});
+
+function type(d) {
+  d.count = +d.count;
+  d.date = parseDate(d.date);
+  return d;
+};
+
+</script>
+</body>
