@@ -50,7 +50,7 @@ var pack = d3.pack()
     .size([width-150, height])
     .padding(1.5);
 
-d3.csv("https://gist.githubusercontent.com/Tcleary/fbd10b689f029b3d652234a63e11e600/raw/f1996baa2cca67ef263624ffbfb8547ba6f95ef7/1961_1965_bubble.csv", function(d) {
+d3.csv("https://gist.githubusercontent.com/Tcleary/fbd10b689f029b3d652234a63e11e600/raw/da9991de706635e7aa32f1727c407ef52904bee0/1961_1965_bubble.csv", function(d) {
   d.value = +d["Weight"];
   d.Call_Type = d["Label"]
 
