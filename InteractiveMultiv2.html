@@ -134,7 +134,7 @@ svg.append("defs")
 
 //end slider part----------------------------------------------------------------------------------- 
 
-d3.tsv("https://gist.githubusercontent.com/Tcleary/a4b442a8db36f980d2c16060843e89f0/raw/4f1945fae91bb790b1fcf7197598d5289c847d85/keywords_by_year.tsv", function(error, data) { 
+d3.tsv("https://gist.githubusercontent.com/Tcleary/a4b442a8db36f980d2c16060843e89f0/raw/6601447e2906989d1f1a2cde7406f5f3d1f0654a/keywords_by_year.tsv", function(error, data) { 
   color.domain(d3.keys(data[0]).filter(function(key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
     return key !== "date"; 
   }));
