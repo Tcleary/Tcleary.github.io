@@ -12,7 +12,7 @@
 var keywords = ['Aboliton','Aesthetics','Affect','African','American','Asian','Black','Body','Border','Capitalism','Citizenship','City','Civilization','Class','Colonialism','Community','Contract','Coolie','Copyright','Corporation','Culture','Democracy','Dialect','Diaspora','Digital','Disability','Diversity','Domestic','Economy','Empire','Enviroment','Ethnicity','Exceptionalism','Family','Fashion','Finance','Freedom','Gender','Gesture','Globalization','Government','Identity','Immigration','Indian','Indigenous','Interiority','Internment','Islam','Labor','Latino','Law','Liberalism','Literature','Market','Marriage','Media','Mestizo','Migration','Modern','Nation','Naturalization','Neoliberalism','Normal','Orientalism','Performance','Politics','Prison','Property','Public','Queer','Race','Racialization','Reform','Region','Religion','Rural','Science','Secular','Sentiment','Sex','Skill','Slavery','Society','Sound','South','Space','State','Subject','Technology','Terror','Time','Visual','War','West','White','Youth']
 
 
-Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/d285bff305620b51a2d4ab0f52c7f5ed/raw/43d721371fb14634837d688d7519cc3cab1ef699/keywords_year_list.csv', (err, rows) => {
+Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/d285bff305620b51a2d4ab0f52c7f5ed/raw/ab68979fead5be341138c51e90b45d6e63227036/keywords_year_list.csv', (err, rows) => {
 	var data = keywords.map(y => {
 	var d = rows.filter(r => r.name === y)
 
