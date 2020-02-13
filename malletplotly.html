@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="graph"></div>
+<script>
+
+var keywords = ['muslim arab muslims','history historical past','literary literature book','time fact point','civilization civilized tommo','narrative narratives story','latin puerto cuba','james boston henry','cherokee missionary missionaries','digital humanities data','indian native indians','twain mark twain's','baldwin wright shock','melville thoreau nature','england english massachusetts','city urban chicago','orleans katrina downloaded','class home consumer','great life men','medical franklin medicine','technology technological machine','business economic men','york published university','work ways studies','domestic stowe beecher','land landscape west','public state accessed','political jefferson revolution','church catholic religious','american america americans','music jazz musical','american studies scholars','life death world','immigration immigrants citizenship','order power social','san francisco spiritualism','film films hollywood','gay queer lesbian','american york press','body human health','culture cultural people','war military army','man human nature','art painting paintings','hawaiian hawai pacific','national committee box','slavery slave southern','food farm rural','humor tom comic','school students education','friedan bicycle physics','family children child','public american world','story fiction characters','japanese japan tourism','don't it's i'm','political movement rights','media radio television','black negro african','society reform york','women woman women's','financial crisis debt','poem poetry poems','police violence crime','words language world','war cold vietnam','art artists modernism','states united u.s','howells crane crane's','folklore anthropology folk','photographs photography photograph','disability mental psychology','university press state','white racial race','population county rural','social political society','labor workers work','chinese china asian','religious religion christian','cultural american discourse','sound sounds music','theatre play theater','advertising flight barton','adams french john','jewish ethnic jews','los angeles city','indigenous settler colonial','social society study','political party politics','frontier cooper roosevelt','ibid made george','law state legal','animal animals human','time man people','science scientific veblen','mexican mexico spanish','god puritan england','palestine palestinian israel','sexual marriage sex','house museum architecture']
+
+
+Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/b505a1428ee92ed2d54b117b93884221/raw/84590613ce24085b61763250f8b64110c1295102/MalletCounts.csv', (err, rows) => {
+	var data = keywords.map(y => {
+	var d = rows.filter(r => r.name === y)
+
+    return {
+      type: 'line',
+      name: y,
+      x: d.map(r => r.date),
+      y: d.map(r => r.count)
+    }
+
+  });
+		
+	var layout = {
+        title: 'Topics in American Studies',
+		height: 700,
+        xaxis: {
+			title: 'Year',
+            //rangeselector: selectorOptions,
+            rangeslider: {
+				thickness: 0.05
+			}
+        },
+        yaxis: {
+			title: 'Count',
+            fixedrange: true //for slider
+        },
+		//horizontal legend
+		showlegend: true,
+		legend: {
+			title: 'Keywords',
+			"orientation": "h",
+			y: -0.5, //to place legend below slider
+			x: 0.05
+		},
+		//colorway: ['#ff1a1a', '#ff531a', '#ff8c1a', '#ffc61a', '#ffff1a', '#c6ff1a', '#8cff1a', '#53ff1a', '#1aff1a', '#1aff53', '#1aff8c', '#1affc6', '#1affff', '#1ac6ff', '#1a8cff', '#1a53ff', '#1a1aff', '#531aff', '#8c1aff', '#c61aff', '#ff1aff', '#ff1ac6', '#ff1a8c', '#ff1a53', '#ff1a1a']
+	};
+
+
+  Plotly.newPlot('graph', data, layout)
+})
+
+</script>
+</body>
+</html>
