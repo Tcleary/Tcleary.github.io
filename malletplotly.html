@@ -14,7 +14,7 @@ var keywords = ['muslim arab muslims','history historical past','literary litera
 
 Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/b505a1428ee92ed2d54b117b93884221/raw/84590613ce24085b61763250f8b64110c1295102/MalletCounts.csv', (err, rows) => {
 	var data = keywords.map(y => {
-	var d = rows.filter(r => r.name === y)
+	var d = rows.filter(r => r.composition === y)
 
     return {
       type: 'line',
