@@ -20,7 +20,7 @@ Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/b505a1428ee92ed2d54b11
       type: 'line',
       name: y,
       x: d.map(r => r.date),
-      y: d.map(r => r.count)
+      y: d.map(r => r.weight)
     }
 
   });
@@ -36,7 +36,7 @@ Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/b505a1428ee92ed2d54b11
 			}
         },
         yaxis: {
-			title: 'Count',
+			title: 'Weight',
             fixedrange: true //for slider
         },
 		//horizontal legend
