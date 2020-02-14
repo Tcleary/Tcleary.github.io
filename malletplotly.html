@@ -18,7 +18,7 @@ Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/b505a1428ee92ed2d54b11
 
     return {
       type: 'line',
-      name: y,
+      composition: y,
       x: d.map(r => r.date),
       y: d.map(r => r.weight)
     }
