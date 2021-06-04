@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="graph"></div>
+<script>
+
+var keywords = ['Aeronautics','African Americans','Aging','Agriculture','Airlines','Airport terminals','Alcoholism','Amazon','Amusements','Animals','Armed Forces','Art','Arts','Asian Americans','Astoria','Bars (Drinking establishments)','Bayside','Bedford-Stuyvesant','Bensonhurst','Bicycle commuting','Bicycle lanes','Borough Park','Bronx','Brooklyn','Budget','Buildings','Bushwick','Business','Census','Charities','Chelsea','Child care','Child Welfare','Childbirth','Children','Church','City Planning','Civil Rights','Cleaning','Clinics','Comorbidity','Coney Island (New York, N.Y.)','Construction','Construction industry','Contact Tracing','Corona','Coronavirus','Coronavirus/COVID-19','Corrections','Courts','COVID-19','Crime','Crime and Criminals','Criminal Justice','Crown Heights','Culture','CUNY','Demonstrations','Department of Correction (DOC)','Disabilities','Discrimination','Distance Education','Domestic Violence','Drugs','Drugstores','Economics','Education','Elections','Elective','Electric utilities','Elmhurst','Emergency Medical Services (EMS)','Employment','Environmental Protection','Ethnic Groups','Ethnicity','Eviction','Factories','Families','Family violence','Far Rockaway','Federal aid','Federal government','Finance','Fire departments','Fire Fighters','Fire Island','Firearms','First Responders','Flatbush','Flushing','Food','Forest Hills','Fresh Meadows','Fundraising','Funeral rites and ceremonies','Gender identity','Glendale','Government','Government aid','Government Health','Governors Island','Greenpoint','Greenwich Village','Harlem','Hate Crimes','Health','Health and Hospitals Corporation (HHC)','Health Government','Health Housing','Health Insurance','Higher','Hispanic Americans','HIV/AIDS','Holidays','Holocaust','Homeless','Homeless Persons','Homelessness','Hospitals','Hotels','Housing','Howard Beach','Hudson Square','Human Resources Administration (HRA)','Hunts Point','Immigrants','Immigration','Influenza','Infrastructure','Infrastructure (Economics)','Insurance','Jackson Heights','Jamaica','Jewish (1939-1945)','Journalism','Kew Gardens','Labor','Labor and Laboring Classes','Labor supply--essential','Labor Unions','Land Use','Landlord and tenant','Lead poisoning','Legislation','LGBTQ','Libraries','Little Neck','Long Island City','Manhattan','Manhattan Labor','Masks','Maspeth','Media','Medical care','Medical Personnel','Medical Researchers','Medical Statistics','Medical Supplies','Medicine--Research','Memorials','Mental Health','Middle Village','Minorities','Morris Heights','Morris Park','Mortality','Mortality--Statistics','Motion picture theaters','Museums','Nassau County','New Jersey','New York (N.Y.)--Politics and government','New York (State)--Politics','New York (State)--Politics and government','New York (State)--Politics and govnernment','Nonprofit Organizations','Nurses','Nursing Home','Nursing Homes','Office buildings','Older people','Ozone Park','Parades','Parks','Parole','Pay equity','Performing arts','Philanthropy','Physical fitness centers','Police','Police Department','Police departments','Poliomyelitis','Political campaigns','Politics','Pollution','Postal service','Poverty','Practical','Price regulation','Prison','Prisoners','Prisons','Prospect Heights','Protests','Public health','Public Housing','Public Safety','Public Utilities','Public Welfare','Quarantine','Queens','Queens Village','Race Relations','Racism','Real Property','Recreation','Red Hook','Regional economic disparities','Religion','Rent','Restaurants','Retail','Richmond Hill','Rockaway','Rockaway Beach','Rosedale','Sanitation','Schools','Science','Senior centers','Seniors','Sex workers','Sexual harassment','Sexual minorities','Shelters for homeless','Small  Business','Social Distance','Special Events','Sports','Springfield Gardens','St. Albans','Staten Island','Stores','Students','Suffolk County','Summer employment','Sunnyside','Sunset Park','Surgery','Taxation','Teachers','Technology','Telecommuting','Testing','Theatres','Tourism','Transgender','Transgender people','Transportation','Travel','Unemployment','Upper West Side','Vaccination','Ventilation','Volunteers','Washington Heights','Weather','Weddings','Whitestone','Williamsburg','Women','Woodhaven','Woodside','World Trade Center','Youth']
+
+
+Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/7ddafaec74278139bef5a767f348a7e5/raw/fe3129b208106c534e9ba4ed7fb13fa21269be2f/COVIDtest.csv', (err, rows) => {
+	var data = keywords.map(y => {
+	var d = rows.filter(r => r.name === y)
+
+    return {
+      type: 'line',
+      name: y,
+      x: d.map(r => r.date),
+      y: d.map(r => r.count)
+    }
+
+  });
+		
+	var layout = {
+        title: 'COVID timeline',
+		height: 700,
+        xaxis: {
+			title: 'Date',
+            //rangeselector: selectorOptions,
+            rangeslider: {
+				thickness: 0.05
+			}
+        },
+        yaxis: {
+			title: 'Count',
+            fixedrange: true //for slider
+        },
+		//horizontal legend
+		showlegend: true,
+		legend: {
+			title: 'Subject',
+			"orientation": "h",
+			y: -0.5, //to place legend below slider
+			x: 0.05
+		},
+		//colorway: ['#ff1a1a', '#ff531a', '#ff8c1a', '#ffc61a', '#ffff1a', '#c6ff1a', '#8cff1a', '#53ff1a', '#1aff1a', '#1aff53', '#1aff8c', '#1affc6', '#1affff', '#1ac6ff', '#1a8cff', '#1a53ff', '#1a1aff', '#531aff', '#8c1aff', '#c61aff', '#ff1aff', '#ff1ac6', '#ff1a8c', '#ff1a53', '#ff1a1a']
+	};
+
+
+  Plotly.newPlot('graph', data, layout)
+})
+
+</script>
+</body>
+</html>
