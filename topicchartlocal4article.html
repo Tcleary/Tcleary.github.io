@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<!-- Plotly.js -->
+<script src="http://trackingkeywords.net/static/js/plotly.1.52.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="graph"></div>
+<script>
+
+var keywords = ["adams french john","advertising flight barton","american america americans","american studies scholars","american york press","animal animals human","art artists modernism","art painting paintings","baldwin wright shock","black negro african","body human health","business economic men","cherokee missionary missionaries","chinese china asian","churc catholic religious","city urban chicago","civilization civilized tommo","class home consumer","cultural american discourse","culture cultural people","digital humanities data","disability mental psychology","domestic stowe beecher","don't it's i'm","england english massachusetts","family children child","film films hollywood","financial crisis debt","folklore anthropology folk","food farm rural","friedan bicycle physics","frontier cooper roosevelt","gay queer lesbian","god puritan england","great life men","hawaiian hawai pacific","history historical past","house museum architecture","howells crane crane's","humor tom comic","ibid made george","immigration immigrants citizenship","indian native indians","indigenous settler colonial","james boston henry","japanese japan tourism","jewish ethnic jews","labor workers work","land landscape west","latin puerto cuba","law state legal","life death world","literary literature book","los angeles city","man human nature","media radio television","medical franklin medicine","melville thoreau nature","mexican mexico spanish","music jazz musical","muslim arab muslims","narrative narratives story","national committee box","order power social","orleans katrina downloaded","palestine palestinian israel","photographs photography photograph","poem poetry poems","police violence crime","political jefferson revolution","political movement rights","political party politics","population county rural","public american world","public state accessed","religious religion christian","san francisco spiritualism","school students education","science scientific veblen","sexual marriage sex","slavery slave southern","social political society","social society study","society reform york","sound sounds music","states united u.s.","story fiction characters","technology technological machine","theatre play theater","time fact point","time man people","twain mark twain's","university press state","war cold vietnam","war military army","white racial race","women woman women's","words language world","work ways studies","york published university"]
+
+
+Plotly.d3.csv('http://trackingkeywords.net/wp-content/uploads/2020/04/TopicModelWeights.csv', (err, rows) => {
+	var data = keywords.map(y => {
+	var d = rows.filter(r => r.composition === y)
+
+    return {
+      type: 'line',
+      name: y,
+      x: d.map(r => r.date),
+      y: d.map(r => r.weight)
+    }
+
+  });
+		
+	var layout = {
+        title: 'Topics in American Studies',
+		height: 700,
+        xaxis: {
+			title: 'Year',
+            //rangeselector: selectorOptions,
+            rangeslider: {
+				thickness: 0.05
+			}
+        },
+        yaxis: {
+			title: 'Weight',
+            fixedrange: true //for slider
+        },
+		//horizontal legend
+		showlegend: true,
+		legend: {
+			title: 'Keywords',
+			"orientation": "h",
+			y: -0.5, //to place legend below slider
+			x: 0.05
+		},
+		//colorway: ['#ff1a1a', '#ff531a', '#ff8c1a', '#ffc61a', '#ffff1a', '#c6ff1a', '#8cff1a', '#53ff1a', '#1aff1a', '#1aff53', '#1aff8c', '#1affc6', '#1affff', '#1ac6ff', '#1a8cff', '#1a53ff', '#1a1aff', '#531aff', '#8c1aff', '#c61aff', '#ff1aff', '#ff1ac6', '#ff1a8c', '#ff1a53', '#ff1a1a']
+	};
+
+
+  Plotly.newPlot('graph', data, layout)
+})
+
+</script>
+</body>
+</html>
