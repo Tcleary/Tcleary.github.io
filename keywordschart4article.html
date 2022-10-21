@@ -22,24 +22,13 @@ Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9
 	var data = keywords.map(y => {
 	var d = rows.filter(r => r.name === y)
 
-    return Asian {
+    return keywords.Asian {
       mode: 'lines',
       name: y,
       x: d.map(r => r.date),
       y: d.map(r => r.count)
       line: {
     	dash: 'dot',
-   	 width: 4
-      }
-    };
-		
-  return Black {
-      mode: 'lines',
-      name: y,
-      x: d.map(r => r.date),
-      y: d.map(r => r.count)
-	line: {
-    	dash: 'solid',
    	 width: 4
       }
     };
