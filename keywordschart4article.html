@@ -9,55 +9,38 @@
 <div id="graph"></div>
 <script>
 
-Asian = 'Asian'
-Black = 'Black'
-Latino = 'Latino'
-Race = 'Race'
-White = 'White'
+Plotly.d3.csv("https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9c0df9f96f1/raw/c576856b20d9a21674ac0f0499d5a220222696fa/Keywords4Article", function(err, rows){
 
-	
-var keywords = [Asian,Black,Latino,Race,White]
+  function unpack(rows, key) {
+  return rows.map(function(row) { return row[key]; });
+}
 
-Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9c0df9f96f1/raw/c576856b20d9a21674ac0f0499d5a220222696fa/Keywords4Article', (err, rows) => {
-	var data = keywords.map(y => {
-	var d = rows.filter(r => r.name === y)
+  
+var trace1 = {
+  type: "scatter",
+  mode: "lines",
+  name: 'Asain',
+  x: unpack(rows, 'Year'),
+  y: unpack(rows, 'Asian'),
+  line: {color: '#17BECF'}
+}
 
-    return {
-      type: 'line',
-      name: y,
-      x: d.map(r => r.date),
-      y: d.map(r => r.count)
-    }
-		
-  });
-		
-	var layout = {
-        title: 'Keywords in American Studies',
-		height: 700,
-        xaxis: {
-			title: 'Year',
-            //rangeselector: selectorOptions,
-            rangeslider: {
-				thickness: 0.05
-			}
-        },
-        yaxis: {
-			title: 'Count',
-            fixedrange: true //for slider
-        },
-		//horizontal legend
-		showlegend: true,
-		legend: {
-			title: 'Keywords',
-			"orientation": "h",
-			y: -0.5, //to place legend below slider
-			x: 0.05
-		},
-		//colorway: ['#ff1a1a', '#ff531a', '#ff8c1a', '#ffc61a', '#ffff1a', '#c6ff1a', '#8cff1a', '#53ff1a', '#1aff1a', '#1aff53', '#1aff8c', '#1affc6', '#1affff', '#1ac6ff', '#1a8cff', '#1a53ff', '#1a1aff', '#531aff', '#8c1aff', '#c61aff', '#ff1aff', '#ff1ac6', '#ff1a8c', '#ff1a53', '#ff1a1a']
-	};
+var trace2 = {
+  type: "scatter",
+  mode: "lines",
+  name: 'Black',
+  x: unpack(rows, 'Year'),
+  y: unpack(rows, 'Black'),
+  line: {color: '#7F7F7F'}
+}
 
+var data = [trace1,trace2];
+    
+var layout = {
+  title: 'Basic Time Series', 
+};
 
-  Plotly.newPlot('graph', data, layout)
+Plotly.newPlot('myDiv', data, layout, {showSendToCloud: true});
 })
 
 </script>
