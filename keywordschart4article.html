@@ -9,16 +9,7 @@
 <div id="graph"></div>
 <script>
 
-var keywords = ['Asian','Black','Latino','Race','White']
-
-var trace1 = { keywords=['American']
-	mode: 'lines',
-	name: 'dashdot',
-	line: {
-		dash: 'dashdot',
-		width: 4
-	}
-}
+var keywords = [Asian,Black,Latino,Race,White]
 
 Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9c0df9f96f1/raw/c576856b20d9a21674ac0f0499d5a220222696fa/Keywords4Article', (err, rows) => {
 	var data = keywords.map(y => {
