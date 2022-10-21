@@ -17,7 +17,7 @@ Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9
 	var d = rows.filter(r => r.name === y)
 
     return {
-      type: 'line',
+      mode: 'line',
       name: y,
       x: d.map(r => r.date),
       y: d.map(r => r.count)
