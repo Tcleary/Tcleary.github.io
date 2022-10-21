@@ -15,9 +15,9 @@ Latino = 'Latino'
 Race = 'Race'
 White = 'White'
 
-var Asian = {
-  x: [1, 2, 3, 4, 5],
-  y: [1, 3, 2, 3, 1],
+var trace1 = {
+  x: d.map(r => r.date),
+  y: d.map(r => r.count)	
   mode: 'lines',
   name: 'Asian',
   line: {
@@ -26,7 +26,7 @@ var Asian = {
   }
 };
 
-var Black = {
+var trace2 = {
   x: [1, 2, 3, 4, 5],
   y: [1, 3, 2, 3, 1],
   mode: 'lines',
