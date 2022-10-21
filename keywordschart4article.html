@@ -11,13 +11,21 @@
 
 var keywords = ['Asian','Black','Latino','Race','White']
 
+var trace1 = { keywords=['American']
+	mode: 'lines',
+	name: 'dashdot',
+	line: {
+		dash: 'dashdot',
+		width: 4
+	}
+}
 
 Plotly.d3.csv('https://gist.githubusercontent.com/Tcleary/05614b7bccdb73ed9775f9c0df9f96f1/raw/c576856b20d9a21674ac0f0499d5a220222696fa/Keywords4Article', (err, rows) => {
 	var data = keywords.map(y => {
 	var d = rows.filter(r => r.name === y)
 
     return {
-      mode: 'line',
+      type: 'line',
       name: y,
       x: d.map(r => r.date),
       y: d.map(r => r.count)
